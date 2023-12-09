@@ -17,4 +17,5 @@ public class BodyService {
     public Body getBodyById(Long id) {
         return bodyRepo.findBodyById(id);
     }
+
 }

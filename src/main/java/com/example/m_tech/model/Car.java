@@ -11,7 +11,8 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Long wheel_id;
+    @ManyToOne
+    private Wheel wheel;
     private int countOfWheels;
 
     private Long body_id;

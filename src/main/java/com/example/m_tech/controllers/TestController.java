@@ -20,12 +20,9 @@ public class TestController {
     private BodyService bodyService;
     @Autowired
     private WheelService wheelService;
-    @GetMapping("/getCar")
-    public String get() {
-//        Car car = new Car();
-//        carService.save(car);
-//        System.out.println(carService.getCar());
-        return "Hello";
+    @GetMapping("/getCars")
+    public List<Car> get() {
+        return carService.getAllCars();
     }
     @GetMapping("/bodies")
     public List<Body> getAllCarBody() {
@@ -41,11 +38,8 @@ public class TestController {
         return carService.save(car);
     }
     @GetMapping("/getAllCarInformation/{id}")
-    public String getCarById(@ModelAttribute("id") Long id) {
-        Car car = carService.getCar(id);
-        String info = String.format("id: %s name: %s body:{id: %s, type: %s, color: %s}", car.getId(), car.getName(), car.getBody_id(),
-                bodyService.getBodyById(car.getBody_id()).getTypeBody());
-        return info;
+    public Car getCarById(@ModelAttribute("id") Long id) {
+        return carService.getCar(id);
     }
 
 }
