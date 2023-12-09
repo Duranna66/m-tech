@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 public class CarService {
     @Autowired
     private CarRepo carRepo;
-    public Car getCar() {
-        return carRepo.findCarById(1L);
+    public Car getCar(Long id) {
+        return carRepo.findCarById(id);
     }
     public Car save(Car car) {
         return carRepo.save(car);

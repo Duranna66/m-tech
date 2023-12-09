@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface BodyRepo extends JpaRepository<Body, Long> {
     List<Body> getBodiesBy();
+    Body findBodyById(Long id);
 }

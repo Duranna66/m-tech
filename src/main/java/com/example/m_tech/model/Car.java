@@ -12,6 +12,7 @@ public class Car {
     private Long id;
     private String name;
     private Long wheel_id;
+    private int countOfWheels;
 
     private Long body_id;
 

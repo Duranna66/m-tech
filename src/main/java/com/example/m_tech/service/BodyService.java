@@ -14,4 +14,7 @@ public class BodyService {
     public List<Body> getAllBody() {
         return bodyRepo.getBodiesBy();
     }
+    public Body getBodyById(Long id) {
+        return bodyRepo.findBodyById(id);
+    }
 }
