@@ -15,6 +15,9 @@ public class CarService {
         return carRepo.findCarById(id);
     }
     public Car save(Car car) {
+        if(car.getCountOfWheels() < 2) {
+            return null;
+        }
         return carRepo.save(car);
     }
     public List<Car> getAllCars() {

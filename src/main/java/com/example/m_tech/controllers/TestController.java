@@ -7,6 +7,8 @@ import com.example.m_tech.service.BodyService;
 import com.example.m_tech.service.CarService;
 import com.example.m_tech.service.WheelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,13 +35,20 @@ public class TestController {
         return wheelService.getAll();
     }
     @PostMapping("/addCar")
-    public Car addCar(@RequestBody Car car) {
-        System.out.println(car);
-        return carService.save(car);
+    public ResponseEntity<?> addCar(@RequestBody Car car)  {
+        Car c = carService.save(car);
+        if(c == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Count < 2");
+        }
+        return ResponseEntity.ok(c);
     }
     @GetMapping("/getAllCarInformation/{id}")
-    public Car getCarById(@ModelAttribute("id") Long id) {
-        return carService.getCar(id);
+    public ResponseEntity<?> getCarById(@ModelAttribute("id") Long id) {
+        Car car = carService.getCar(id);
+        if(car == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No car with this id");
+        }
+         return  ResponseEntity.ok(car) ;
     }
 
 }

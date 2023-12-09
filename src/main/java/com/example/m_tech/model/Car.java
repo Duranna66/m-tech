@@ -14,7 +14,7 @@ public class Car {
     @ManyToOne
     private Wheel wheel;
     private int countOfWheels;
-
-    private Long body_id;
+    @ManyToOne
+    private Body body;
 
 }
