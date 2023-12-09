@@ -7,6 +7,7 @@ import com.example.m_tech.service.BodyService;
 import com.example.m_tech.service.CarService;
 import com.example.m_tech.service.WheelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +23,9 @@ public class CarController {
     @Autowired
     private WheelService wheelService;
     @GetMapping("/getCars")
-    public List<Car> get() {
-        return carService.getAllCars();
+    public List<Car> get(@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+                         @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize) {
+        return carService.getAllCars(pageNo, pageSize);
     }
     @GetMapping("/bodies")
     public List<Body> getAllCarBody() {
@@ -42,7 +44,7 @@ public class CarController {
         return ResponseEntity.ok(c);
     }
     @GetMapping("/getAllCarInformation/{id}")
-    public ResponseEntity<?> getCarById(@ModelAttribute("id") Long id) {
+    public ResponseEntity<?> getCarById(@PathVariable("id") Long id) {
         Car car = carService.getCar(id);
         if(car == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No car with this id");
