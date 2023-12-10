@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  postgres:
+    image: 'postgres'
+    ports:
+      - "5432:5432"
+    container_name: 'java-postgres'
+    environment:
+      - 'POSTGRES_USER=ivannikolaev'
+      - 'POSTGRES_PASSWORD=Apolo'
+      - 'POSTGRES_DB=m_tech'
+
+  app:
+    build: ./
+    container_name: 'java-app'
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/m_tech
+      DATASOURCE_USERNAME: ivannikolaev
+      DATASOURCE_PASSWORD: Apolo
+    ports:
+      - "8081:8090"
+    depends_on:
+      - postgres
